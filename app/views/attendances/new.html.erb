@@ -27,6 +27,12 @@
       background-color: #5c5;
       color: #300;
     }
+    div#transit-mode-button button{
+      background-color: #ccf;
+    }
+    div#time_selections button{
+      background-color: #faa;
+    }
   </style>
   <script>
    /* jQuery.getJSON("/addresses.json",function(data){start = data.schoolAddress+", Chicago, IL";
@@ -181,9 +187,11 @@ function commit(){
       <div id = "directions">
       </div>
       <div id  = "buttons">
+        <div id = "transit-mode-button">
     <button id = "transit" onclick = "transitChange('transit')">CTA</button>
     <button  id = "walking" onclick = "transitChange('walking')">Walking</button>
     <button id = "bicycling" onclick = "transitChange('bicycling')">Biking</button>
+  </div>
   <div id ="time_selections">
     <button id = "early" onclick="timeChange(0)">Early</button>
     <button id = "onTime" onclick="timeChange(1)">On Time</button>
