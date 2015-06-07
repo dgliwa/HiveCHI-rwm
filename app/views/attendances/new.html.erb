@@ -23,6 +23,10 @@
       top: 43px;
       overflow: scroll;
     }
+    #submit-button{
+      background-color: #5c5;
+      color: #300;
+    }
   </style>
   <script>
     jQuery.getJSON("/addresses.json",function(data){start = data.schoolAddress+", Chicago, IL";
@@ -33,6 +37,7 @@
     var map;
     var start;
     var end;
+    var tmode = "transit";
 
     function initialize() {
         directionsDisplay = new google.maps.DirectionsRenderer();
@@ -57,6 +62,7 @@
         if (status == google.maps.DirectionsStatus.OK) {
            directionsDisplay.setDirections(result);
          }
+      document.getElementById("tansit-mode-field").value = tmode;
       });
     }
     google.maps.event.addDomListener(window, 'load', function(){initialize();});
@@ -73,12 +79,14 @@
       <div class="ui-content" id="map-canvas">
         <!-- map loads here... -->
       </div>
-    <button onclick = "calcRoute(google.maps.TravelMode.TRANSIT)">CTA</button>
-    <button onclick = "calcRoute(google.maps.TravelMode.WALKING)">Walking</button>
-    <button onclick = "calcRoute(google.maps.TravelMode.BICYCLING)">Biking</button>
+    <button onclick = "calcRoute(google.maps.TravelMode.TRANSIT);tmode='transit';">CTA</button>
+    <button onclick = "calcRoute(google.maps.TravelMode.WALKING);tmode='walking'">Walking</button>
+    <button onclick = "calcRoute(google.maps.TravelMode.BICYCLING);tmode='bicycling'">Biking</button>
     <div id = "directions">
     </div>
   </div>
+  <input type = "hidden" id = "tansit-mode-field" name = "tansit-mode" value = "transit">
+  <button id = "submit-button">Let's Go!</button>
   </div><!-- /page -->
 
 </body>
