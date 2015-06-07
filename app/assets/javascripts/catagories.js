@@ -16,12 +16,12 @@
 
 
 
-var restauranteur = angular.module('restauranteur', [])
+// var restauranteur = angular.module('restauranteur', [])
 
-restauranteur.config(['$routeProvider', ($routeProvider) -&gt;
-  $routeProvider.
-    otherwise({
-      templateUrl: '../templates/home.html',
-      controller: 'HomeCtrl'
-    })
-])
+// restauranteur.config(['$routeProvider', ($routeProvider) -&gt;
+//   $routeProvider.
+//     otherwise({
+//       templateUrl: '../templates/home.html',
+//       controller: 'HomeCtrl'
+//     })
+// ])
