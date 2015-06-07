@@ -15,6 +15,14 @@
     .ui-content#map-canvas{
       height: 400px;
     }
+    div#directions{
+      height: 440px;
+      width:  300px;
+      background-color: #eee;
+      position: absolute;
+      top: 43px;
+      overflow: scroll;
+    }
   </style>
   <script>
     jQuery.getJSON("/addresses.json",function(data){start = data.schoolAddress+", Chicago, IL";
@@ -36,6 +44,7 @@
      map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
      directionsDisplay.setMap(map);
      calcRoute(google.maps.TravelMode.TRANSIT);
+     directionsDisplay.setPanel(document.getElementById("directions"));
     }
 
     function calcRoute(mode) {
@@ -57,17 +66,19 @@
 
   <div data-role="page">
 
-  <div data-role="header">
-    <h1>Map</h1>
-  </div><!-- /header -->
-
-    <div role="main" class="ui-content" id="map-canvas">
-      <!-- map loads here... -->
+    <div data-role="header">
+     <h1>Map</h1>
+    </div><!-- /header -->
+    <div role = "main">
+      <div class="ui-content" id="map-canvas">
+        <!-- map loads here... -->
+      </div>
+    <button onclick = "calcRoute(google.maps.TravelMode.TRANSIT)">CTA</button>
+    <button onclick = "calcRoute(google.maps.TravelMode.WALKING)">Walking</button>
+    <button onclick = "calcRoute(google.maps.TravelMode.BICYCLING)">Biking</button>
+    <div id = "directions">
     </div>
-  <button onclick = "calcRoute(google.maps.TravelMode.TRANSIT)">CTA</button>
-  <button onclick = "calcRoute(google.maps.TravelMode.WALKING)">Walking</button>
-  <button onclick = "calcRoute(google.maps.TravelMode.BICYCLING)">Biking</button>
-
+  </div>
   </div><!-- /page -->
 
 </body>
