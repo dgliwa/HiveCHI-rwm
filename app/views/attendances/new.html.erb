@@ -6,16 +6,18 @@
   <!-- google fonts -->
   <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 
-  <!-- primary css -->
- <link rel="stylesheet" type="text/css" href="css/application.css">
-
   <!-- jquery library -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" ></script>
 
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcZ1NrRFt8hQ9k6fbf-H2VhKDSwlmi-g8"></script>
+  <style>
+    .ui-content#map-canvas{
+      height: 400px;
+    }
+  </style>
   <script>
-    var res = jQuery.getJSON("/addresses.json",function(data){start = data.schoolAddress+", Chicago, IL";
+    jQuery.getJSON("/addresses.json",function(data){start = data.schoolAddress+", Chicago, IL";
       end = data.eventAddress+", Chicago, IL";
     });
     var directionsDisplay;
