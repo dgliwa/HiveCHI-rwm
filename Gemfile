@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use Angular JS for front end optimization
-gem 'angularjs-rails'
+# gem 'angularjs-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
