@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   # TODO: TOS acceptance, password strength checks
   before_validation do
     self.phone = self.phone.gsub(/[^\d]/, '') unless self.phone.blank?
+    self.phone = "1" + self.phone unless self.phone[0] == "1"
+    self.phone = "+" + self.phone
   end
   validates_presence_of :email, :username, :phone, :school_id
   validates_uniqueness_of :email, :username # :phone
@@ -15,7 +17,7 @@ class User < ActiveRecord::Base
     with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   }
   validates :password, length: { minimum: 10 }, allow_nil: true
-  validates :phone, length: { is: 10 }
+  validates :phone, length: { is: 12 }
 
   before_save :require_phone_verification, :require_email_verification
 
@@ -55,7 +57,7 @@ class User < ActiveRecord::Base
     )
     client.account.messages.create(
       from: "+18443117433",
-      to: "+1" + self.phone,
+      to: self.phone,
       body: "Your RideW/Me verification code is #{self.phone_token}"
     )
   end
@@ -63,7 +65,7 @@ class User < ActiveRecord::Base
   private
 
   def require_phone_verification
-    if self.phone_changed?
+    if self.phone_changed? && !(new_record? && phone_verified)
       self.phone_verified = false
       self.phone_token = SecureRandom.hex(4)
       send_verification_text
@@ -71,7 +73,7 @@ class User < ActiveRecord::Base
   end
 
   def require_email_verification
-    if self.email_changed?
+    if self.email_changed? && !(new_record? && email_verified)
       self.email_verified = false
       self.email_token = SecureRandom.hex(10)
       send_verification_email
