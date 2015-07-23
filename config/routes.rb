@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
+
   get 'login' => 'session#login'
   get 'dashboard' => 'welcome#dashboard'
   get 'pdashboard' => 'welcome#parent_dashboard'
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
   post 'users/verify' => 'users#verify'
   get 'users/verify-email' => 'users#verify_email'
   resources :users, only: [:create, :show, :destroy]
-  
+
   post 'events/:id/attendances/create' => 'attendances#create'
   post 'events/:event_id/attendances/update' => 'attendances#update'
   get 'events/:event_id/attendances/show' => 'attendances#show'
